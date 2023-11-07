@@ -1,0 +1,27 @@
+{% include "header.html" %}
+
+<body class="text-center">
+
+     <form  action="{{ url_for('charge' , subtotal=subtotal) }}" method="post"  enctype="multipart/form-data">
+      
+
+      <article>
+        <label class="py-4">
+          <span>Total is ${{subtotal}}</span>
+        </label>
+      </article>
+
+
+
+      <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+              data-key="{{ key }}"
+              data-description="Stripe CheckOut"
+              data-amount="{{subtotal*100}}"
+              data-locale="auto">
+
+       </script>
+      </form>
+
+</body>
+
+{% include "footer.html" %}      
