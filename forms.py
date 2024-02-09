@@ -1,6 +1,6 @@
 #
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, PasswordField , SelectField , FileField
+from wtforms import StringField, SubmitField, PasswordField , SelectField , FileField , SearchField
 from wtforms.validators import DataRequired, URL
 from flask_ckeditor import CKEditorField
 from flask_wtf.file import FileField, FileRequired , FileAllowed 
@@ -61,4 +61,12 @@ class CreateAboutForm(FlaskForm):
 
     title = StringField("Title", validators=[DataRequired()])
     description = CKEditorField("About The Brand" , validators=[DataRequired()])
+    submit = SubmitField("Submit")
+
+
+    
+# WTForm for creating an about post
+class SearchForm(FlaskForm):
+
+    title = SearchField("Search for products", validators=[DataRequired()])
     submit = SubmitField("Submit")

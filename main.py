@@ -9,7 +9,7 @@ from flask_sqlalchemy import SQLAlchemy
 from functools import wraps
 from werkzeug.security import generate_password_hash, check_password_hash 
 from sqlalchemy.orm import relationship
-from forms import CreateProductForm, RegisterForm, LoginForm , CategoryForm , EditProductForm , CreateAboutForm
+from forms import CreateProductForm, RegisterForm, LoginForm , CategoryForm , EditProductForm , CreateAboutForm , SearchForm
 import os
 import stripe
 from werkzeug.utils import secure_filename
@@ -702,6 +702,24 @@ def charge():
         return render_template('sucesspay.html',
                                 amount=amount,
                                 subtotal=subtotal)
+
+#------------------------------implementing search functionality -------------------------------------#                                
+
+@app.route("/searchproducts", methods=["GET", "POST"])
+def get_product():
+        
+        form=SearchForm()
+        sresult = db.get_or_404(Products, 3)
+        if form.validate_on_submit():
+            result = db.session.execute(db.select(Products).where(Products.title == form.title.data))
+            sresult = result.scalar()
+            print(sresult.title)
+            return render_template("products.html" , form=form , result=sresult)
+                
+        
+        return render_template("products.html" , form=form , result=sresult)
+
+
 
 #-----------------------------------------------------------------------------------------------#
 

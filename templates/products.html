@@ -1,0 +1,88 @@
+{% from "bootstrap5/form.html" import render_form %}
+{% include "header.html" %}
+
+
+
+
+
+ <!-- search bar -->
+ <!-- <div class="row">
+    <div class="col-md-12" >
+        <form class="card card-sm" method="post">
+            <div class="card-body row no-gutters align-items-center">
+                <div class="col">
+                    <input type="search" name="item_name" placeholder="Search for products" class="form-control form-control-borderless">
+                </div>
+                <div class="col-auto">
+                    <a class="btn btn-outline-success" type="submit" href="{{ url_for('get_product')}}">Search</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div> -->
+
+
+<main class="mb-4">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+        <!--Rendering the registration form here-->
+        {{render_form(form, novalidate=True, button_map={"submit": "success"}) }}
+        </div>
+      </div>
+    </div>
+  </main>
+  </div>
+
+
+
+
+
+<!-- the cover  -->
+<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-body-tertiary has-bg-img bg-purple bg-blend-screen">
+ 
+    <div class="col-md-6 p-lg-5 mx-auto my-5">
+      <h1 class="display-3 fw-bold">Designed for You!</h1>
+      <h3 class="fw-normal text-muted mb-3">With the best prices and best quality, here you will find what you are looking for!</h3>
+      <div class="d-flex gap-3 justify-content-center lead fw-normal">
+      </div>
+    </div>
+    <div class="product-device shadow-sm d-none d-md-block">
+    <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
+  </div>
+  
+  <hr class="featurette-divider">
+
+
+
+
+
+
+
+{% if result %}
+  <!-- Serach result -->
+
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+    <div class="col">
+      <div class="card shadow-sm">
+        <img src="{{result.image}}" class="bd-placeholder-img card-img-top" height="225" alt="{{result.name}}">
+       
+        <div class="card-body">
+          <p class="card-text">{{result.title}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <small class="text-body-secondary text-danger ">{{result.price}}$</small> </p>
+           
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="btn-group">
+              
+             
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+
+  
+{% include "footer.html" %}
