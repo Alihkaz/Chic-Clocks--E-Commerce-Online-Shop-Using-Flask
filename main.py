@@ -307,10 +307,21 @@ def get_store():
     nb_of_cart_items=len(cart_items)
 
 
+    form=SearchForm()
+    if form.validate_on_submit():
+
+        result = db.session.execute(db.select(Products).where(Products.title == form.key.data))
+        sresult = result.scalar()
+       
+        return redirect(url_for("get_product" , search_result=sresult))
+        
+
+
     return render_template("main.html",
                             categories=categories,
                             products=products,
-                            nb_of_cart_items=nb_of_cart_items)
+                            nb_of_cart_items=nb_of_cart_items,
+                            form=form)
  
 
 
@@ -643,8 +654,8 @@ def show_cart():
                             subtotal=subtotal)
 
 
-#------------------------------------------ Remove From Cart------------------------------------------------------------#
-#------------------------------------------------------------------------------------------------------------------------------#
+#------------------------------------------- Remove From Cart-------------------------------------------------------------------#
+#-------------------------------------------------------------------------------------------------------------------------------#
 @app.route("/deletefrom_cart/<int:product_id>" , methods=["GET", "POST"])
 def delete_from_cart(product_id): 
 
@@ -705,20 +716,13 @@ def charge():
 
 #------------------------------implementing search functionality -------------------------------------#                                
 
-@app.route("/searchproducts", methods=["GET", "POST"])
-def get_product():
+@app.route("/searchproducts/sresult", methods=["GET", "POST"])
+def get_product(sresult):
         
-        form=SearchForm()
-        sresult = db.get_or_404(Products, 3)
-        if form.validate_on_submit():
-            result = db.session.execute(db.select(Products).where(Products.title == form.title.data))
-            sresult = result.scalar()
-            print(sresult.title)
-            return render_template("products.html" , form=form , result=sresult)
-                
-        
-        return render_template("products.html" , form=form , result=sresult)
 
+        
+        
+        return render_template("products.html" , result=sresult )
 
 
 #-----------------------------------------------------------------------------------------------#

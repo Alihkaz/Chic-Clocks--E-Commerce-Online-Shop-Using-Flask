@@ -1,4 +1,5 @@
 
+{% from "bootstrap5/form.html" import render_form %}
 
 
 {% include "header.html" %}
@@ -8,7 +9,11 @@
 <!-- the cover  -->
 <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-body-tertiary has-bg-img bg-purple bg-blend-screen">
  
-  
+  <div class="col-lg-8 col-md-10 mx-auto">
+    <!--Rendering Search form here-->
+    {{ render_form(form , novalidate=True, button_map={"submit": "success"} , enctype="multipart/form-data") }}
+  </div>
+
 
 <hr class="featurette-divider">
 <!-- ---------------------------------------------------------------------------------------------------------------------- -->
