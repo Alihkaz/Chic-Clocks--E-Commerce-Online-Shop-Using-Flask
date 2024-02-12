@@ -307,21 +307,21 @@ def get_store():
     nb_of_cart_items=len(cart_items)
 
 
-    form=SearchForm()
-    if form.validate_on_submit():
+    # form=SearchForm()
+    # if form.validate_on_submit():
 
-        result = db.session.execute(db.select(Products).where(Products.title == form.key.data))
-        sresult = result.scalar()
+    #     result = db.session.execute(db.select(Products).where(Products.title == form.key.data))
+    #     sresult = result.scalar()
        
-        return redirect(url_for("get_product" , search_result=sresult))
+    #     return redirect(url_for("get_product" , search_result=sresult))
         
 
 
     return render_template("main.html",
                             categories=categories,
                             products=products,
-                            nb_of_cart_items=nb_of_cart_items,
-                            form=form)
+                            nb_of_cart_items=nb_of_cart_items,)
+                            # form=form)
  
 
 
@@ -716,13 +716,13 @@ def charge():
 
 #------------------------------implementing search functionality -------------------------------------#                                
 
-@app.route("/searchproducts/sresult", methods=["GET", "POST"])
-def get_product(sresult):
+# @app.route("/searchproducts/sresult", methods=["GET", "POST"])
+# def get_product(sresult):
         
 
         
         
-        return render_template("products.html" , result=sresult )
+#         return render_template("products.html" , result=sresult )
 
 
 #-----------------------------------------------------------------------------------------------#
